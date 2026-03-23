@@ -23,6 +23,26 @@ public class Event {
     }
 
     public String label() {
-        return title + ", " + track;
+        return title + " {" + track + "}";
+    }
+
+    public LocalDateTime getStartTime() {
+        return start;
+    }
+
+    public String getTrack() {
+        return track;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public int getDuration() {
+        return durationMinutes;
+    }
+
+    public ZoneId getZone() {
+        return zone;
     }
 }
