@@ -21,8 +21,10 @@ public class Ticket {
         tickets.forEach(System.out::println);
 //        tickets.sort(TicketComparator.anonim_prior);
 //        tickets.sort(TicketComparator.byPriority);
-        tickets.sort(TicketComparator.byDate);
         tickets.sort(TicketComparator.lambda);
+        System.out.println("After");
+        tickets.forEach(System.out::println);
+        tickets.sort(TicketComparator.byDate);
 //        TicketComparator.StaticNestedComparator SNC = new TicketComparator.StaticNestedComparator();
 //        tickets.sort(SNC);
 
