@@ -12,10 +12,10 @@ public class Main {
         ZoneId kyiv = ZoneId.of("Europe/Kiev");
 
         List<Event> events = List.of(
-                new Event("Java Basics",    LocalDateTime.of(2026, 4, 1, 9,  0), 60,  kyiv, "A"),
-                new Event("Spring Boot",    LocalDateTime.of(2026, 4, 1, 10, 30), 90, kyiv, "B"),
-                new Event("Docker 101",     LocalDateTime.of(2026, 4, 1, 13, 0), 45,  kyiv, "A"),
-                new Event("Clean Code",     LocalDateTime.of(2026, 4, 1, 14, 0), 60,  kyiv, "C")
+                new Event("Studying", LocalDateTime.of(2026, 6, 1, 9,  0), 60,  kyiv, "A"),
+                new Event("Dota 2 match", LocalDateTime.of(2026, 3, 23, 22, 20), 130, kyiv, "B"),
+                new Event("Vibecode",  LocalDateTime.of(2026, 1, 1, 0, 0), 0,  kyiv, "A"),
+                new Event("Air attack",  LocalDateTime.of(2026, 3, 24, 0, 19), 60,  kyiv, "C")
         );
 
         for (Event event : events) {
