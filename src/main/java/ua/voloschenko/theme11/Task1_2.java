@@ -4,7 +4,7 @@ import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public class Task1 {
+public class Task1_2 {
     public record Book(String title, String author, int year, List<String> tags) {}
     public static void main(String[] args) {
 
