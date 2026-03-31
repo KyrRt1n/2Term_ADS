@@ -28,5 +28,35 @@ public class Task1 {
 
         System.out.println(result);
 
+        System.out.println("======== Task 2 ========");
+        System.out.println("======== Task 2 ========");
+        System.out.println("======== Task 2 ========");
+
+
+        List<String> uniqueTags = books.stream().
+                flatMap(book -> book.tags().stream())
+                .distinct().
+                sorted().
+                toList();
+
+        System.out.println("Unique tags: " + uniqueTags);
+
+        Map<String, Long> tagFrequency = books.stream()
+                .flatMap(book -> book.tags()
+                        .stream())
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+
+        System.out.println("Tag frequency: " + tagFrequency);
+        int topN = 3;
+        List<Map.Entry<String, Long>> topTags = tagFrequency.entrySet().stream()
+                .sorted(Map.Entry.<String, Long>comparingByValue(Comparator.reverseOrder())
+                        .thenComparing(Map.Entry.comparingByKey()))
+                .limit(topN)
+                .toList();
+
+        System.out.println("Top-" + topN + " tags:");
+        topTags.forEach(entry ->
+                System.out.println(entry.getKey() + " : " + entry.getValue())
+        );
     }
 }
