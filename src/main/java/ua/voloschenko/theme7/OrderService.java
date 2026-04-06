@@ -12,13 +12,13 @@ public class OrderService {
             doPayment();
         }
         catch(Exceptions.PaymentGatewayException e){
-            log.log(Level.SEVERE, "Payment failed for Order ID: " + ID + " (User: " + userEmail + ")", e);
+            log.log(Level.SEVERE, "Main failed for Order ID: " + ID + " (User: " + userEmail + ")", e);
 
             throw new Exceptions.OrderProcessingException("Failed to process order for " + userEmail, e);
         }
     }
 
     private void doPayment() throws Exceptions.PaymentGatewayException {
-        throw new Exceptions.PaymentGatewayException("Payment gateway is unresponsive");
+        throw new Exceptions.PaymentGatewayException("Main gateway is unresponsive");
     }
 }

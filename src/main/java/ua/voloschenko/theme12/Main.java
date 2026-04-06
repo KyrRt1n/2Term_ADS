@@ -83,7 +83,26 @@ public class Main {
             System.err.println("Error in creating report: " + e.getMessage());
         }
 
+        //Task 3
+        Path inboxDir = Path.of("practical-data", "inbox");
+        Path archiveDir = Path.of("practical-data", "archive");
 
+        try {
+            Files.createDirectories(inboxDir);
+
+            Files.writeString(inboxDir.resolve("report1.txt"), "Important");
+            Files.writeString(inboxDir.resolve("cache1.tmp"), "Temp 1");
+            Files.writeString(inboxDir.resolve("notes.txt"), "Hello world");
+            Files.writeString(inboxDir.resolve("cache2.tmp"), "Temp2");
+
+            System.out.println("Test created, start archiving");
+
+            // Викликаємо наш метод
+            archiveTmpFiles(inboxDir, archiveDir);
+
+        } catch (IOException e) {
+            System.err.println("Test data error " + e.getMessage());
+        }
 
     }
 }
