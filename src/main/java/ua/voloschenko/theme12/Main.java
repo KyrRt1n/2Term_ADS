@@ -73,5 +73,17 @@ public class Main {
             System.out.println(p);
         }
 
+        //Task 2
+
+        Path reportPath = Path.of("report.txt");
+        try {
+            PaymentReportWriter.writeReport(reportPath, result.payments(), result.invalidLines());
+            System.out.println("\nReported to: " + reportPath.toAbsolutePath());
+        } catch (IOException e) {
+            System.err.println("Error in creating report: " + e.getMessage());
+        }
+
+
+
     }
 }
