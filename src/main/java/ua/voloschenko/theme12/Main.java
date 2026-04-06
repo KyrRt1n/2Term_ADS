@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static ua.voloschenko.theme12.InboxArchiver.archiveTmpFiles;
+import static ua.voloschenko.theme12.PathSafety.safeResolve;
 
 public class Main {
 
@@ -102,6 +103,29 @@ public class Main {
 
         } catch (IOException e) {
             System.err.println("Test data error " + e.getMessage());
+        }
+
+        //Task 4
+        Path base = Path.of("practical-data");
+
+        System.out.println("Base directory " + base.normalize() + "\n");
+
+        System.out.println("--- Test 1: reports/2025.txt ---");
+        try {
+            Path safePath = safeResolve(base, "reports/2025.txt");
+            System.out.println("Approved: " + safePath);
+        } catch (IllegalArgumentException e) {
+            System.err.println("Error: " + e.getMessage());
+        }
+
+        System.out.println();
+
+        System.out.println("--- Test 2: ../secret.txt ---");
+        try {
+            Path unsafePath = safeResolve(base, "../secret.txt");
+            System.out.println("Approved: " + unsafePath);
+        } catch (IllegalArgumentException e) {
+            System.err.println("Error: " + e.getMessage());
         }
 
     }
