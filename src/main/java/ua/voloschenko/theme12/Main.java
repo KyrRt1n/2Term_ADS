@@ -10,6 +10,7 @@ import java.util.List;
 
 import static ua.voloschenko.theme12.InboxArchiver.archiveTmpFiles;
 import static ua.voloschenko.theme12.PathSafety.safeResolve;
+import static ua.voloschenko.theme12.StatusFile.updateStatus;
 
 public class Main {
 
@@ -126,6 +127,22 @@ public class Main {
             System.out.println("Approved: " + unsafePath);
         } catch (IllegalArgumentException e) {
             System.err.println("Error: " + e.getMessage());
+        }
+
+        //Task 5
+        Path statusFile = Path.of("status.bin");
+        int N = 10;
+
+        try {
+            byte[] emptyData = new byte[N];
+            Files.write(statusFile, emptyData);
+            System.out.println("File status.bin with 10 zeros).");
+
+            byte newStatus = 7;
+            updateStatus(statusFile, 4, newStatus);
+            System.out.println("Byte[4] upd to " + newStatus);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
     }
