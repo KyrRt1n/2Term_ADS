@@ -2,9 +2,12 @@ package ua.voloschenko.theme13;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.LinkedBlockingQueue;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         List<Order> orders = List.of(
                 new Order(1, 1502),
                 new Order(22, 42142),
@@ -39,12 +42,12 @@ public class Main {
 
         System.out.println("All tasks done. Main thread continues.");
 
-        System.out.println("task2");
-        System.out.println("task2");
-        System.out.println("task2");
-        System.out.println("task2");
-        System.out.println("task2");
-        System.out.println("task2");
+        System.out.println("task2");                                                                            //task2
+        System.out.println("task2");                                                                            //task2
+        System.out.println("task2");                                                                            //task2
+        System.out.println("task2");                                                                            //task2
+        System.out.println("task2");                                                                            //task2
+        System.out.println("task2");                                                                            //task2
 
         runSingleTest(new UnsafeInventory(100), "UnsafeInventory");
         runSingleTest(new SynchronizedInventory(100), "SynchronizedInventory");
@@ -52,12 +55,12 @@ public class Main {
         runStressHarness(500);
 
 
-        System.out.println("task3");
-        System.out.println("task3");
-        System.out.println("task3");
-        System.out.println("task3");
-        System.out.println("task3");
-        System.out.println("task3");
+        System.out.println("task3");                                                                            //task3
+        System.out.println("task3");                                                                            //task3
+        System.out.println("task3");                                                                            //task3
+        System.out.println("task3");                                                                            //task3
+        System.out.println("task3");                                                                            //task3
+        System.out.println("task3");                                                                            //task3
 
 
         Account account1 = new Account(1, 10000);
@@ -95,6 +98,36 @@ public class Main {
         System.out.println("Transfers resolved without deadlock");
         System.out.println("Final balance 1: " + account1.getBalance());
         System.out.println("Final balance 2: " + account2.getBalance());
+
+
+        System.out.println("task4");                                                                            //task4
+        System.out.println("task4");                                                                            //task4
+        System.out.println("task4");                                                                            //task4
+        System.out.println("task4");                                                                            //task4
+        System.out.println("task4");                                                                            //task4
+
+        int consumerCount = 3;
+        BlockingQueue<SupportTicket> queue = new LinkedBlockingQueue<>(10);
+        ConcurrentHashMap<String, Integer> stats = new ConcurrentHashMap<>();
+
+        Thread producerThread = new Thread(new TicketProducer(queue, 50, consumerCount));
+
+        List<Thread> consumers = new ArrayList<>();
+        for (int i = 0; i < consumerCount; i++) {
+            Thread consumer = new Thread(new TicketConsumer(queue, stats));
+            consumer.setName(String.valueOf(i + 1));
+            consumers.add(consumer);
+        }
+
+        for (Thread c : consumers)
+            c.start();
+        producerThread.start();
+
+        producerThread.join();
+        for (Thread c : consumers)
+            c.join();
+
+        stats.forEach((topic, count) -> System.out.println(topic + ": " + count));
     }
 
     public record Order(long id, int totalCents) {}
