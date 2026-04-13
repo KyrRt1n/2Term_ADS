@@ -39,6 +39,18 @@ public class Main {
 
         System.out.println("All tasks done. Main thread continues.");
 
+        System.out.println("task2");
+        System.out.println("task2");
+        System.out.println("task2");
+        System.out.println("task2");
+        System.out.println("task2");
+        System.out.println("task2");
+
+        runSingleTest(new UnsafeInventory(100), "UnsafeInventory");
+        runSingleTest(new SynchronizedInventory(100), "SynchronizedInventory");
+
+        runStressHarness(500);
+
     }
 
     public record Order(long id, int totalCents) {}
