@@ -51,6 +51,50 @@ public class Main {
 
         runStressHarness(500);
 
+
+        System.out.println("task3");
+        System.out.println("task3");
+        System.out.println("task3");
+        System.out.println("task3");
+        System.out.println("task3");
+        System.out.println("task3");
+
+
+        Account account1 = new Account(1, 10000);
+        Account account2 = new Account(2, 10000);
+
+        System.out.println("Start balance 1: " + account1.getBalance());
+        System.out.println("Start balance 2: " + account2.getBalance());
+
+        Runnable transferAtoB = () -> {
+            for (int i = 0; i < 500; i++) {
+                TransferService.transfer(account1, account2, 10);
+            }
+        };
+
+        Runnable transferBtoA = () -> {
+            for (int i = 0; i < 500; i++) {
+                TransferService.transfer(account2, account1, 10);
+            }
+        };
+
+        Thread t1 = new Thread(transferAtoB);
+        Thread t2 = new Thread(transferBtoA);
+
+        t1.start();
+        t2.start();
+
+        try {
+            t1.join();
+            t2.join();
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            System.err.println("Threads interruption");
+        }
+
+        System.out.println("Transfers resolved without deadlock");
+        System.out.println("Final balance 1: " + account1.getBalance());
+        System.out.println("Final balance 2: " + account2.getBalance());
     }
 
     public record Order(long id, int totalCents) {}
