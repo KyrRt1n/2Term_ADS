@@ -6,7 +6,7 @@ import java.util.Arrays;
 public class ClassInfoPrinter {
 
     public static void print(Class<?> clazz) {
-        System.out.println("Class metadata: " + clazz.getSimpleName() + " ===");
+        System.out.println("Metadata of " + clazz.getSimpleName());
 
         System.out.println(".getName(): " + clazz.getName());
 
